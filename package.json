@@ -1,0 +1,27 @@
+{
+  "name": "pub-sub-redis",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Shiva Chapagain",
+  "license": "MIT",
+  "description": "A pub/sub system using Redis and WebSockets",
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/redis": "^4.0.10",
+    "@types/ws": "^8.5.14",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "redis": "^4.7.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}
