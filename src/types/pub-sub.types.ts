@@ -15,9 +15,9 @@ export interface SubscribeMessage {
 }
 
 export interface ClientMessage {
-  action: "subscribe" | "publish"; // Add 'publish' action if needed
+  action: "subscribe" | "publish";
   topic: string;
-  message?: string; // Make message optional for subscribe
+  message?: string;
   token: string;
 }
 

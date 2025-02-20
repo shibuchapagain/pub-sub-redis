@@ -1,16 +1,25 @@
 {
-  "name": "pub-sub-redis",
+  "name": "shiva-pub-sub-redis",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A pub/sub system using Redis and WebSockets",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "test": "jest"
   },
-  "keywords": [],
+  "keywords": [
+    "redis",
+    "pubsub",
+    "websockets",
+    "typescript"
+  ],
   "author": "Shiva Chapagain",
   "license": "MIT",
-  "description": "A pub/sub system using Redis and WebSockets",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.8",
     "@types/redis": "^4.0.10",
@@ -23,5 +32,13 @@
   "devDependencies": {
     "@types/node": "^22.13.4",
     "typescript": "^5.7.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shibuchapagain/pub-sub-redis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shibuchapagain/pub-sub-redis/issues"
+  },
+  "homepage": "https://github.com/shibuchapagain/pub-sub-redis#readme"
 }

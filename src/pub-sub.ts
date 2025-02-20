@@ -67,7 +67,6 @@ export class PubSub implements IPubSub {
     socket.on("close", () => this.handleDisconnect(socket));
 
     socket.on("error", (error) => {
-      console.error("WebSocket error:", error);
       this.handleDisconnect(socket);
       throw new ConnectionFailError(`WebSocket error: ${error}`);
     });
@@ -88,7 +87,6 @@ export class PubSub implements IPubSub {
       if (action === "subscribe") {
         this.handleSubscribe(socket, decoded.userId, topic);
       } else if (action === "publish" && message.message) {
-        // Handle publish
         this.handlePublish(socket, decoded.userId, topic, message.message);
       } else {
         this.sendError(
@@ -119,15 +117,13 @@ export class PubSub implements IPubSub {
       console.log(`User ${userId} published "${message}" to topic "${topic}"`);
       socket.send(
         JSON.stringify({ status: "Message published successfully!" })
-      ); // Notify publisher
+      );
     } catch (error) {
-      console.error(`Error publishing to Redis:`, error);
       this.sendError(socket, "Failed to publish message.");
     }
   }
 
   private handleSubscribe(socket: WebSocket, userId: string, topic: string) {
-    console.log(`User ${userId} subscribed to topic: ${topic}`);
     this.activeClients.set(userId, socket);
 
     this.redisSubscriber.subscribe(topic, (msg) => {
@@ -138,11 +134,9 @@ export class PubSub implements IPubSub {
   }
 
   private handleDisconnect(socket: WebSocket) {
-    console.log("Client disconnected.");
     for (const [userId, ws] of this.activeClients.entries()) {
       if (ws === socket) {
         this.activeClients.delete(userId);
-        // Unsubscribe from Redis topics associated with this client (if needed) - more complex
       }
     }
   }
@@ -166,7 +160,6 @@ export class PubSub implements IPubSub {
   public async publish(message: PublishMessage) {
     try {
       await this.redisPublisher.publish(message.topic, message.message);
-      console.log(`Message published to topic "${message.topic}"`);
     } catch (error) {
       throw new MessagePublishError(`Failed to publish message: ${error}`);
     }
@@ -177,7 +170,6 @@ export class PubSub implements IPubSub {
       await this.redisSubscriber.subscribe(topic, (message) => {
         callback(message);
       });
-      console.log(`Subscribed to topic: ${topic}`);
     } catch (error) {
       throw new MessagePublishError(`Failed to subscribe to topic: ${error}`);
     }
