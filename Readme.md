@@ -15,5 +15,5 @@ A lightweight and robust pub/sub system built with Redis and WebSockets, designe
 ## Installation
 
 ```bash
-npm install pub-sub-redis
+npm install shiva-pub-sub-redis
 ```
